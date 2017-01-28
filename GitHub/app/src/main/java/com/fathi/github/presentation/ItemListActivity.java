@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 
 import com.fathi.github.R;
+import com.fathi.github.data.model.CodeRepository;
+import com.fathi.github.domain.UseCase;
+import com.fathi.github.domain.coderepositoriesusecases.LoadCodeRepositoriesUsecase;
 import com.fathi.github.presentation.dummy.DummyContent;
 
 import java.util.List;
@@ -65,6 +68,25 @@ public class ItemListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+
+        testLoad("Blackberry", 0);
+    }
+
+    void testLoad(String organization, int pageIndex ){
+        LoadCodeRepositoriesUsecase.RequestValues requestValue = new LoadCodeRepositoriesUsecase.RequestValues(organization, pageIndex, Constants.PAGE_SIZE, true);
+
+        Injection.provideUseCaseHandler().execute(Injection.provideCodeRepositoriesUsecase(), requestValue,
+                new UseCase.UseCaseCallback<LoadCodeRepositoriesUsecase.ResponseValue>() {
+                    @Override
+                    public void onSuccess(LoadCodeRepositoriesUsecase.ResponseValue response) {
+                        List<CodeRepository> repositories = response.getRepositories();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

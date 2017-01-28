@@ -6,8 +6,7 @@ import android.support.annotation.NonNull;
 import com.fathi.github.data.ReposDataSource;
 import com.fathi.github.data.model.CodeRepository;
 import com.fathi.github.data.remote.github.model.CodeRepositoryDataMapper;
-import com.fathi.github.data.remote.github.model.GitHubRepository;
-import com.fathi.github.data.remote.github.model.RepositoryEntry;
+import com.fathi.github.data.remote.github.model.RepoEntity;
 import com.fathi.github.data.remote.github.networking.GitHubEndPoints;
 
 import java.io.IOException;
@@ -46,12 +45,13 @@ public class GitHubReposDataSource implements ReposDataSource {
                 .build();
 
         GitHubEndPoints service = retrofit.create(GitHubEndPoints.class);
+
         try {
-            Response<GitHubRepository> response = service.getRepository(organizationName, pageIndex, pageSize).execute();
-            callback.onDataLoaded( CodeRepositoryDataMapper.getInstance().transform((List<RepositoryEntry>) response.body().getRepositoryEntries()) );
+            Response<List<RepoEntity>> response = service.getRepository(organizationName, pageIndex, pageSize).execute();
+            callback.onDataLoaded( CodeRepositoryDataMapper.getInstance().transform((List<RepoEntity>) response.body() ) );
         } catch (IOException e) {
             e.printStackTrace();
-            //TODO handle different Exceptions to show different messget to User
+            /* TODO handle different Exceptions to show different message to User */
             callback.onDataNotAvailable();
         }
 

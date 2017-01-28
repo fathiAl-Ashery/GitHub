@@ -85,7 +85,7 @@ public class LoadCodeRepositoriesUsecase extends UseCase<LoadCodeRepositoriesUse
             this.codeRepositories = checkNotNull(codeRepositories, "data cannot be null!");
         }
 
-        public List<CodeRepository> getReposistoies() {
+        public List<CodeRepository> getRepositories() {
             return codeRepositories;
         }
     }
