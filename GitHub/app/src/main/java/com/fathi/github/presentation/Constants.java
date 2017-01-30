@@ -6,4 +6,5 @@ package com.fathi.github.presentation;
 
 public class Constants {
     public final static int PAGE_SIZE = 10;
+    public final static String ORGANIZATION_NAME = "Blackberry";
 }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GitHub</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="loading_Data_error">Failed to load data, Check connectivity and try again</string>
+    <string name="no_data">No Data</string>
+    <string name="sample_text">Sample text</string>
 </resources>
